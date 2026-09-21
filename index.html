@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Flores Amarillas 🌻</title>
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-family: Georgia, serif;
+      background: linear-gradient(
+        135deg,
+        #fff6a8,
+        #ffd83d,
+        #ffb300
+      );
+      color: #5a3a00;
+    }
+
+
+    /* =========================
+       FONDO
+    ========================= */
+
+    .fondo {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .luz {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+
+      background: rgba(255,255,255,.25);
+
+      border-radius: 50%;
+      filter: blur(60px);
+
+      animation: moverLuz 7s infinite alternate;
+    }
+
+    .luz:nth-child(1) {
+      top: 5%;
+      left: 5%;
+    }
+
+    .luz:nth-child(2) {
+      bottom: 5%;
+      right: 5%;
+      animation-delay: 2s;
+    }
+
+    @keyframes moverLuz {
+
+      from {
+        transform: translate(0,0);
+      }
+
+      to {
+        transform: translate(80px,50px);
+      }
+
+    }
+
+
+    /* =========================
+       SOBRE INICIAL
+    ========================= */
+
+    .inicio {
+      position: fixed;
+
+      inset: 0;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      z-index: 10;
+
+      transition: 1.2s;
+    }
+
+    .sobre {
+
+      width: 330px;
+      max-width: 85%;
+
+      height: 230px;
+
+      background: #fff8d6;
+
+      border-radius: 15px;
+
+      box-shadow:
+        0 20px 50px rgba(90,50,0,.35);
+
+      position: relative;
+
+      text-align: center;
+
+      padding-top: 70px;
+
+      animation: aparecer 1.5s ease;
+
+    }
+
+
+    /* Triángulo del sobre */
+
+    .sobre::before {
+
+      content: "";
+
+      position: absolute;
+
+      top: 0;
+      left: 0;
+
+      border-left: 165px solid transparent;
+      border-right: 165px solid transparent;
+
+      border-top: 105px solid #f4c430;
+
+    }
+
+
+    .sello {
+
+      position: absolute;
+
+      top: 82px;
+      left: 50%;
+
+      transform: translateX(-50%);
+
+      font-size: 38px;
+
+      z-index: 2;
+
+    }
+
+
+    .sobre h1 {
+
+      position: relative;
+
+      z-index: 3;
+
+      margin-top: 70px;
+
+      font-size: 22px;
+
+    }
+
+
+    /* BOTÓN ABRIR */
+
+    .boton {
+
+      margin-top: 25px;
+
+      padding: 14px 32px;
+
+      border: none;
+
+      border-radius: 30px;
+
+      background: #d99b00;
+
+      color: white;
+
+      font-size: 18px;
+
+      cursor: pointer;
+
+      box-shadow:
+        0 7px 20px rgba(100,60,0,.3);
+
+      transition: .3s;
+
+      position: relative;
+
+      z-index: 4;
+
+    }
+
+    .boton:hover {
+
+      transform: scale(1.1);
+
+      background: #b87c00;
+
+    }
+
+
+    /* =========================
+       CARTA
+    ========================= */
+
+    .contenedor {
+
+      position: relative;
+
+      min-height: 100vh;
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      padding: 30px;
+
+    }
+
+
+    .carta {
+
+      position: relative;
+
+      z-index: 2;
+
+      width: 90%;
+
+      max-width: 650px;
+
+      max-height: 90vh;
+
+      overflow-y: auto;
+
+      background: rgba(255,255,255,.94);
+
+      border-radius: 30px;
+
+      padding: 35px 30px;
+
+      text-align: center;
+
+      box-shadow:
+        0 20px 60px rgba(80,50,0,.35);
+
+      opacity: 0;
+
+      transform:
+        scale(.5)
+        rotate(-5deg);
+
+      pointer-events: none;
+
+      transition: 1.2s;
+
+    }
+
+
+    .carta.visible {
+
+      opacity: 1;
+
+      transform:
+        scale(1)
+        rotate(0);
+
+      pointer-events: auto;
+
+    }
+
+
+    .inicio.ocultar {
+
+      opacity: 0;
+
+      pointer-events: none;
+
+    }
+
+
+    .carta h1 {
+
+      font-size: 40px;
+
+      color: #d89b00;
+
+      margin-bottom: 8px;
+
+    }
+
+
+    .fecha {
+
+      font-size: 20px;
+
+      font-weight: bold;
+
+      color: #9b6800;
+
+    }
+
+
+    /* =========================
+       RAMO
+    ========================= */
+
+    .ramo {
+
+      position: relative;
+
+      width: 320px;
+
+      height: 360px;
+
+      margin: 15px auto;
+
+    }
+
+
+    /* FLORES */
+
+    .flor {
+
+      position: absolute;
+
+      width: 75px;
+
+      height: 75px;
+
+      z-index: 3;
+
+      animation:
+        balancear 3s infinite ease-in-out;
+
+    }
+
+
+    /* PÉTALOS DE CADA FLOR */
+
+    .flor::before {
+
+      content: "";
+
+      position: absolute;
+
+      width: 30px;
+      height: 30px;
+
+      background: #ffd21c;
+
+      border-radius: 50%;
+
+      top: 0;
+      left: 22px;
+
+      box-shadow:
+
+        0 28px #ffd21c,
+
+        -28px 14px #ffd21c,
+
+        28px 14px #ffd21c,
+
+        -20px 32px #ffd21c,
+
+        20px 32px #ffd21c;
+
+    }
+
+
+    /* CENTRO DE LA FLOR */
+
+    .flor::after {
+
+      content: "";
+
+      position: absolute;
+
+      width: 25px;
+      height: 25px;
+
+      background: #8b5600;
+
+      border-radius: 50%;
+
+      top: 25px;
+      left: 25px;
+
+      z-index: 2;
+
+      box-shadow:
+        inset 0 0 0 4px #704300;
+
+    }
+
+
+    /* POSICIÓN FLORES */
+
+    .flor1 {
+
+      top: 10px;
+      left: 115px;
+
+    }
+
+    .flor2 {
+
+      top: 65px;
+      left: 35px;
+
+      transform: rotate(-15deg);
+
+      animation-delay: .3s;
+
+    }
+
+    .flor3 {
+
+      top: 65px;
+      right: 35px;
+
+      transform: rotate(15deg);
+
+      animation-delay: .6s;
+
+    }
+
+    .flor4 {
+
+      top: 125px;
+      left: 75px;
+
+      animation-delay: .9s;
+
+    }
+
+    .flor5 {
+
+      top: 130px;
+      right: 70px;
+
+      animation-delay: 1.2s;
+
+    }
+
+    .flor6 {
+
+      top: 145px;
+      left: 122px;
+
+      animation-delay: 1.5s;
+
+    }
+
+
+    /* TALLOS */
+
+    .tallo {
+
+      position: absolute;
+
+      width: 8px;
+
+      height: 200px;
+
+      background: #4b9137;
+
+      border-radius: 10px;
+
+      top: 95px;
+
+      left: 156px;
+
+      transform-origin: top;
+
+      z-index: 1;
+
+    }
+
+
+    .tallo1 {
+      transform: rotate(-30deg);
+    }
+
+    .tallo2 {
+      transform: rotate(-17deg);
+    }
+
+    .tallo3 {
+      transform: rotate(-7deg);
+    }
+
+    .tallo4 {
+      transform: rotate(10deg);
+    }
+
+    .tallo5 {
+      transform: rotate(25deg);
+    }
+
+
+    /* HOJAS */
+
+    .hoja {
+
+      position: absolute;
+
+      width: 65px;
+      height: 30px;
+
+      background: #4c9b38;
+
+      border-radius:
+        100% 0 100% 0;
+
+      z-index: 2;
+
+    }
+
+
+    .hoja1 {
+
+      top: 215px;
+      left: 60px;
+
+      transform: rotate(-30deg);
+
+    }
+
+
+    .hoja2 {
+
+      top: 230px;
+      right: 55px;
+
+      transform: rotate(30deg);
+
+    }
+
+
+    .hoja3 {
+
+      top: 260px;
+      left: 105px;
+
+      transform: rotate(-15deg);
+
+    }
+
+
+    /* CINTA DEL RAMO */
+
+    .cinta {
+
+      position: absolute;
+
+      bottom: 20px;
+
+      left: 105px;
+
+      width: 110px;
+
+      height: 48px;
+
+      background: #e6ad00;
+
+      border-radius: 12px;
+
+      z-index: 4;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      color: white;
+
+      font-size: 25px;
+
+      box-shadow:
+        0 5px 12px rgba(0,0,0,.25);
+
+    }
+
+
+    /* ANIMACIÓN DEL RAMO */
+
+    @keyframes balancear {
+
+      0%,100% {
+
+        transform:
+          rotate(-3deg)
+          translateY(0);
+
+      }
+
+      50% {
+
+        transform:
+          rotate(3deg)
+          translateY(-7px);
+
+      }
+
+    }
+
+
+    /* =========================
+       MENSAJE
+    ========================= */
+
+    .mensaje {
+
+      font-size: 19px;
+
+      line-height: 1.7;
+
+      margin: 15px auto;
+
+      max-width: 550px;
+
+    }
+
+
+    .firma {
+
+      font-size: 25px;
+
+      color: #d49600;
+
+      font-weight: bold;
+
+      margin-top: 25px;
+
+    }
+
+
+    /* =========================
+       BOTÓN SORPRESA
+    ========================= */
+
+    .sorpresa-btn {
+
+      margin-top: 20px;
+
+      padding: 13px 25px;
+
+      border: none;
+
+      border-radius: 25px;
+
+      background: #f1c40f;
+
+      color: #654300;
+
+      font-size: 17px;
+
+      cursor: pointer;
+
+      transition: .3s;
+
+    }
+
+
+    .sorpresa-btn:hover {
+
+      transform: scale(1.08);
+
+    }
+
+
+    #sorpresa {
+
+      display: none;
+
+      margin-top: 20px;
+
+      font-size: 21px;
+
+      line-height: 1.6;
+
+      animation:
+        aparecer 1s ease;
+
+    }
+
+
+    /* =========================
+       PÉTALOS CAYENDO
+    ========================= */
+
+    .petalo {
+
+      position: fixed;
+
+      top: -50px;
+
+      z-index: 1;
+
+      font-size: 25px;
+
+      animation:
+        caer linear infinite;
+
+      pointer-events: none;
+
+    }
+
+
+    @keyframes caer {
+
+      0% {
+
+        transform:
+          translateY(-50px)
+          rotate(0deg);
+
+        opacity: 0;
+
+      }
+
+      15% {
+
+        opacity: 1;
+
+      }
+
+      100% {
+
+        transform:
+          translateY(110vh)
+          rotate(360deg);
+
+        opacity: 0;
+
+      }
+
+    }
+
+
+    /* =========================
+       CORAZONES
+    ========================= */
+
+    .corazon {
+
+      position: fixed;
+
+      bottom: -30px;
+
+      font-size: 25px;
+
+      animation:
+        subir 5s linear forwards;
+
+      pointer-events: none;
+
+      z-index: 5;
+
+    }
+
+
+    @keyframes subir {
+
+      from {
+
+        transform:
+          translateY(0)
+          scale(.7);
+
+        opacity: 1;
+
+      }
+
+      to {
+
+        transform:
+          translateY(-110vh)
+          scale(1.5);
+
+        opacity: 0;
+
+      }
+
+    }
+
+
+    /* =========================
+       APARECER
+    ========================= */
+
+    @keyframes aparecer {
+
+      from {
+
+        opacity: 0;
+
+        transform:
+          translateY(30px);
+
+      }
+
+      to {
+
+        opacity: 1;
+
+        transform:
+          translateY(0);
+
+      }
+
+    }
+
+
+    /* =========================
+       CELULAR
+    ========================= */
+
+    @media(max-width:600px) {
+
+      .carta {
+
+        padding:
+          25px 15px;
+
+      }
+
+      .carta h1 {
+
+        font-size: 31px;
+
+      }
+
+      .ramo {
+
+        transform: scale(.85);
+
+        margin:
+          0 auto;
+
+      }
+
+      .mensaje {
+
+        font-size: 17px;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =========================
+       FONDO
+  ========================= -->
+
+  <div class="fondo">
+
+    <div class="luz"></div>
+
+    <div class="luz"></div>
+
+  </div>
+
+
+  <!-- =========================
+       PÉTALOS
+  ========================= -->
+
+  <div class="petalo"
+       style="left:5%; animation-duration:7s;">
+    🌼
+  </div>
+
+  <div class="petalo"
+       style="left:18%; animation-duration:9s; animation-delay:2s;">
+    🌻
+  </div>
+
+  <div class="petalo"
+       style="left:35%; animation-duration:6s; animation-delay:1s;">
+    🌼
+  </div>
+
+  <div class="petalo"
+       style="left:55%; animation-duration:8s; animation-delay:3s;">
+    🌻
+  </div>
+
+  <div class="petalo"
+       style="left:75%; animation-duration:7s;">
+    🌼
+  </div>
+
+  <div class="petalo"
+       style="left:90%; animation-duration:10s; animation-delay:2s;">
+    🌻
+  </div>
+
+
+  <!-- =========================
+       SOBRE
+  ========================= -->
+
+  <div class="inicio" id="inicio">
+
+    <div class="sobre">
+
+      <div class="sello">
+        🌻
+      </div>
+
+      <h1>
+        Hay algo para vos...
+      </h1>
+
+      <button
+        class="boton"
+        onclick="abrirCarta()">
+
+        💛 Abrir
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       CARTA
+  ========================= -->
+
+  <div class="contenedor">
+
+    <div class="carta" id="carta">
+
+
+      <h1>
+        🌻 Flores Amarillas 🌻
+      </h1>
+
+
+      <div class="fecha">
+
+        21 de septiembre
+
+      </div>
+
+
+      <!-- RAMO -->
+
+      <div class="ramo">
+
+
+        <div class="flor flor1"></div>
+
+        <div class="flor flor2"></div>
+
+        <div class="flor flor3"></div>
+
+        <div class="flor flor4"></div>
+
+        <div class="flor flor5"></div>
+
+        <div class="flor flor6"></div>
+
+
+        <div class="tallo tallo1"></div>
+
+        <div class="tallo tallo2"></div>
+
+        <div class="tallo tallo3"></div>
+
+        <div class="tallo tallo4"></div>
+
+        <div class="tallo tallo5"></div>
+
+
+        <div class="hoja hoja1"></div>
+
+        <div class="hoja hoja2"></div>
+
+        <div class="hoja hoja3"></div>
+
+
+        <div class="cinta">
+          💛
+        </div>
+
+      </div>
+
+
+      <!-- MENSAJE -->
+
+      <p class="mensaje">
+
+        Hoy quería regalarte unas
+        flores amarillas...
+
+        <br>
+
+        Pero como no puedo entregártelas
+        directamente, decidí hacer algo
+        diferente. 🌻
+
+      </p>
+
+
+      <p class="mensaje">
+
+        Te regalo este pequeño detalle
+        para que recuerdes que hay personas
+        que hacen que los días comunes
+        se vuelvan un poquito más especiales.
+
+      </p>
+
+
+      <p class="mensaje">
+
+        Que este 21 de septiembre
+        esté lleno de sonrisas,
+        buenos momentos y muchas
+        cosas bonitas.
+
+      </p>
+
+
+      <div class="firma">
+
+        Para vos, con mucho cariño 💛
+
+      </div>
+
+
+      <!-- BOTÓN SORPRESA -->
+
+      <button
+        class="sorpresa-btn"
+        onclick="mostrarSorpresa()">
+
+        🌻 Hay algo más...
+
+      </button>
+
+
+      <div id="sorpresa">
+
+        ✨ Sorpresa ✨
+
+        <br><br>
+
+        Si llegaste hasta acá,
+        espero que te alla gustado este pequeño detallito.
+
+        <br><br>
+
+        🌻 💛 🌻 💛 🌻
+
+        <br><br>
+
+        ¡Feliz 21 de septiembre!
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================= -->
+
+  <script>
+
+
+    function abrirCarta() {
+
+
+      document
+        .getElementById("inicio")
+        .classList
+        .add("ocultar");
+
+
+      setTimeout(function() {
+
+
+        document
+          .getElementById("carta")
+          .classList
+          .add("visible");
+
+
+        crearCorazones();
+
+
+      }, 700);
+
+
+    }
+
+
+
+    function mostrarSorpresa() {
+
+
+      const sorpresa =
+        document.getElementById("sorpresa");
+
+
+      sorpresa.style.display =
+        "block";
+
+
+      crearCorazones();
+
+
+    }
+
+
+
+    function crearCorazones() {
+
+
+      for (
+        let i = 0;
+        i < 18;
+        i++
+      ) {
+
+
+        const corazon =
+          document.createElement("div");
+
+
+        corazon.className =
+          "corazon";
+
+
+        corazon.innerHTML =
+          Math.random() > .5
+          ? "💛"
+          : "🌻";
+
+
+        corazon.style.left =
+          Math.random() * 100 + "vw";
+
+
+        corazon.style.animationDuration =
+          (3 + Math.random() * 4) + "s";
+
+
+        corazon.style.fontSize =
+          (18 + Math.random() * 25) + "px";
+
+
+        document.body.appendChild(
+          corazon
+        );
+
+
+        setTimeout(function() {
+
+          corazon.remove();
+
+        }, 7000);
+
+
+      }
+
+    }
+
+
+  </script>
+
+
+</body>
+</html>
